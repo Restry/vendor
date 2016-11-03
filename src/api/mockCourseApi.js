@@ -8,7 +8,7 @@ const courses = [
     id: "react-flux-building-applications",
     title: "Building Applications in React and Flux",
     watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
-    authorId: "cory-house",
+    authorId: "restry-house",
     length: "5:08",
     category: "JavaScript"
   },
@@ -24,7 +24,7 @@ const courses = [
     id: "architecture",
     title: "Architecting Applications for the Real World",
     watchHref: "http://www.pluralsight.com/courses/architecting-applications-dotnet",
-    authorId: "cory-house",
+    authorId: "restry-house",
     length: "2:52",
     category: "Software Architecture"
   },

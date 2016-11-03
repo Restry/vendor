@@ -1,24 +1,44 @@
 import React, {PropTypes} from 'react';
 import CourseListRow from './CourseListRow';
+ import {Link} from 'react-router';
+
+import { Table, Icon } from 'antd';
+
+const columns = [{
+  title: 'title',
+  dataIndex: 'title',
+  key: 'title',
+  render: (text,record) => <Link to={'/course/' + record.id}>{text}</Link>
+}, {
+  title: 'authorId',
+  dataIndex: 'authorId',
+  key: 'authorId'
+}, {
+  title: 'category',
+  dataIndex: 'category',
+  key: 'category'
+}, {
+  title: 'length',
+  dataIndex: 'length',
+  key: 'length'
+}, {
+  title: 'Action',
+  key: '',
+  render: (text, record) => (
+    <span>
+      <a href="#">Action 一 {record.authorId}</a>
+      <span className="ant-divider" />
+      <a href="#">Delete</a>
+      <span className="ant-divider" />
+      <a href="#" className="ant-dropdown-link">
+        More actions<Icon type="down" />
+      </a>
+    </span>
+  )
+}];
 
 const CourseList = ({courses}) => {
-  return (
-    <table className="table">
-      <thead>
-      <tr>
-        <th>&nbsp;</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th>Length</th>
-      </tr>
-      </thead>
-      <tbody>
-      {courses.map(course =>
-        <CourseListRow key={course.id} course={course}/>
-      )}
-      </tbody>
-    </table>
+  return ( <Table columns={columns} dataSource={courses}/>
   );
 };
 

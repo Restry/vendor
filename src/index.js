@@ -8,7 +8,7 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
-import 'toastr/build/toastr.min.css';
+
 import './styles/styles.css';
 import './styles/default.less';
 

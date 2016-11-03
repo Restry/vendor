@@ -10,7 +10,10 @@
 .ant-layout-top .ant-layout-header {
   background: #404040;
   height: 65px;
+  line-height: 64px;
 }
+.ant-layout-header .ant-menu{
+  line-height: 64px;}
 
 .ant-layout-top .ant-layout-logo {
   width: 120px;
