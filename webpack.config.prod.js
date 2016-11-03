@@ -27,7 +27,7 @@ export default {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('css/[name].css'),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin()
   ],
@@ -35,7 +35,7 @@ export default {
     loaders: [
       { test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel'] },
       { test: /(\.css)$/, loader: ExtractTextPlugin.extract("css?sourceMap") },
-      { test: /(\.less)$/, loaders: ['style', 'css', 'less'] },
+      { test: /(\.less)$/, loader:ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
 
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
       { test: /\.(woff|woff2)$/, loader: "url?prefix=font/&limit=5000" },
