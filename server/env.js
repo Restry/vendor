@@ -4,7 +4,7 @@ var path = require('path'),
 module.exports = {
 	development: {
 		rootPath: rootPath,
-		db: 'mongodb://mongo/node-jwt-intro',
+		db: 'mongodb://mongo/vendor-db',
 		port: process.env.PORT || 3000
 	},
 	production: {

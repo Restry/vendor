@@ -3,13 +3,22 @@ import React, { PropTypes } from 'react';
 import Header from './common/Header';
 import { connect } from 'react-redux';
 import { Breadcrumb } from 'antd';
+import * as userActions from '../actions/userActions';
+import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
+  getChildContext() {
+    return {
+      user: this.props.user,
+      login: this.props.actions.login
+    };
+  }
+
   render() {
     return (
       <div className="ant-layout-top">
 
-        <Header loading={this.props.loading} />
+        <Header login={this.props.actions.login} user={this.props.user} loading={this.props.loading} />
 
         <div className="ant-layout-wrapper">
           <div className="ant-layout-breadcrumb">
@@ -36,13 +45,26 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  actions: PropTypes.object
+};
+App.childContextTypes = {
+  user: PropTypes.object,
+  login: PropTypes.func
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    loading: state.ajaxCallsInProgress > 0
+    loading: state.ajaxCallsInProgress > 0,
+    user: state.user
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

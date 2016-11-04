@@ -1,9 +1,12 @@
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
-import axios from 'axios';
-import toastr from 'toastr';
 import React from 'react';
+
+import { connect } from 'react-redux';
+import * as userActions from '../../actions/userActions';
+import { bindActionCreators } from 'redux';
+
 
 const residences = [{
   value: 'zhejiang',
@@ -24,15 +27,15 @@ const residences = [{
     label: 'Nanjing',
     children: [{
       value: 'zhonghuamen',
-      label: 'Zhong Hua Men',
-    }],
-  }],
+      label: 'Zhong Hua Men'
+    }]
+  }]
 }];
 
 const RegistrationForm = Form.create()(React.createClass({
   getInitialState() {
     return {
-      passwordDirty: false,
+      passwordDirty: false
     };
   },
   handleSubmit(e) {
@@ -42,12 +45,12 @@ const RegistrationForm = Form.create()(React.createClass({
       if (err) {
         return;
       }
-debugger;
 
-    axios.post('/api/users', values).then((res) => {
+      this.props.actions.registration(values).then((res) => {
+        debugger;
 
-debugger;
-      }).catch(() => {});
+
+      })
 
       console.log('Received values of form: ', values);
     });
@@ -204,7 +207,21 @@ debugger;
         </FormItem>
       </Form>
     );
-  },
+  }
 }));
 
-export default RegistrationForm;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    loading: state.ajaxCallsInProgress > 0,
+    user: state.user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

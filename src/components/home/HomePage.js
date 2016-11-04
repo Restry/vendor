@@ -1,24 +1,55 @@
-import React from 'react';
-import {Link} from 'react-router';
-
-import { DatePicker } from 'antd';
-
-import LoginForm from '../account/Login';
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as UserActions from '../../actions/userActions';
+import UserList from '../account/UserList';
+import {browserHistory} from 'react-router';
 
 class HomePage extends React.Component {
-  render() {
-    return (
-      <div className="jumbotron">
-        <h1>Pluralsig Administration & RESTRY</h1>
-        <DatePicker />
-        <p>React, Redux and React Router in ES6 for ultra-responsive web apps.</p>
-        <Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
+  constructor(props, context) {
+    super(props, context);
+    this.redirectToAddUserPage = this.redirectToAddUserPage.bind(this);
+  }
 
-        <LoginForm />
+  UserRow(User, index) {
+    return <div key={index}>{User.title}</div>;
+  }
+
+  redirectToAddUserPage() {
+    browserHistory.push('/User');
+  }
+
+
+  render() {
+    const {Users} = this.props;
+
+    return (
+      <div>
+        <h1>Users</h1>
+        <input type="submit" value="Add User"
+               className="btn btn-primary"
+               onClick={this.redirectToAddUserPage}/>
+        <UserList Users={Users}/>
       </div>
     );
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  Users: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
 
+function mapStateToProps(state, ownProps) {
+  return {
+    Users: state.user.allUser
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(UserActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

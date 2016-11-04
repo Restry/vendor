@@ -1,8 +1,7 @@
-import { Form, Icon, Input, Button, Checkbox,Message } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Message } from 'antd';
 const FormItem = Form.Item;
 import React from 'react';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 import { Link, IndexLink } from 'react-router';
 
 const NormalLoginForm = Form.create()(React.createClass({
@@ -13,19 +12,11 @@ const NormalLoginForm = Form.create()(React.createClass({
       if (err) {
         return;
       }
+      this.props.login(values).then((res) => {
+        Message.success(res, 'Login success');
+      });
 
-      axios.post('/api/users/auth', values).then((res) => {
-
-        var _token = res.token;
-				var _decoded = jwt_decode(_token);
-
-				// decoded data from our JSON web token
-				Message.info(_decoded);
-
-        Message.success(res,'Login success');
-      }).catch(() => {});
-
-      Message.info('Received values of form: ', values);
+     // Message.info('Received values of form: ', values);
     });
   },
   render() {
@@ -33,18 +24,18 @@ const NormalLoginForm = Form.create()(React.createClass({
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Please input your username!' }]
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your email!' }]
           })(
-            <Input addonBefore={<Icon type="user" />} placeholder="Username" />
-          )}
+            <Input addonBefore={<Icon type="user" />} placeholder="email" />
+            )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: 'Please input your Password!' }]
           })(
             <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
-          )}
+            )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('remember', {
@@ -52,7 +43,7 @@ const NormalLoginForm = Form.create()(React.createClass({
             initialValue: true
           })(
             <Checkbox>Remember me</Checkbox>
-          )}
+            )}
           <a className="login-form-forgot">Forgot password</a>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in

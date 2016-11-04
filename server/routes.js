@@ -24,7 +24,12 @@ module.exports = function (app) {
       var newUser = new User({
         email: req.body.email,
         password: hashedPwd,
-        admin: false
+        admin: false,
+        nickname: req.body.nickname,
+        residence: req.body.residence,
+        phone: req.body.phone,
+        captcha: req.body.captcha,
+        agreement: req.body.agreement
       });
 
       newUser.save(function (err) {

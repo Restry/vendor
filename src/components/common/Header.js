@@ -3,7 +3,6 @@ import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
 import { Menu, Breadcrumb, Row, Col } from 'antd';
 import User from '../account/userinfo';
-let ua={name:"mike"}
 
 const Header = ({loading}) => {
   return (
@@ -40,17 +39,12 @@ const Header = ({loading}) => {
           </Col>
 
           <Col span={6}>
-            <User user={ua} />
+            <User />
           </Col>
         </Row>
 
-
-
       </div>
     </div>
-
-
-
   );
 };
 

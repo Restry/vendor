@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router,Route, IndexRoute,hashHistory } from 'react-router';
+import { Router,Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
@@ -7,8 +7,7 @@ import CoursesPage from './components/course/CoursesPage';
 import RegisterPage from './components/account/register';
 import ManageCoursePage from './components/course/ManageCoursePage'; //eslint-disable-line import/no-named-as-default
 
-export default (
-  <Router history={hashHistory}>
+export default ( 
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
     <Route path="courses" component={CoursesPage} />
@@ -16,6 +15,5 @@ export default (
     <Route path="course/:id" component={ManageCoursePage} />
     <Route path="about" component={AboutPage} />
     <Route path="register" component={RegisterPage} />
-  </Route>
-  </Router>
+  </Route> 
 );
