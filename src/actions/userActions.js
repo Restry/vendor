@@ -15,10 +15,10 @@ export function userRegisterSuccess(userinfo) {
   return { type: types.USER_REGISTER_SUCCESS, userinfo };
 }
 
-export function getAllUser() {
+export function getAllUser(token) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return axios.get('/api/users').then(res=>{
+    return axios.get('/api/users?token='+token).then(res=>{
       dispatch(getUserSuccess(res.data));
     }).catch(error=>{
       dispatch(ajaxCallError(error));

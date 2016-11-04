@@ -4,7 +4,7 @@ export default {
   user:{
     token:'',
     name:'',
-    allUser:[]
+    allUsers:[]
   },
   ajaxCallsInProgress: 0
 };

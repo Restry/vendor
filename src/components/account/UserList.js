@@ -1,30 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Table } from 'antd';
+import { Table ,Icon} from 'antd';
 
 const columns = [{
-  title: 'title',
-  dataIndex: 'title',
-  key: 'title',
+  title: 'nickname',
+  dataIndex: 'nickname',
+  key: 'nickname',
   render: (text, record) => <Link to={'/course/' + record.id}>{text}</Link>
 }, {
-  title: 'authorId',
-  dataIndex: 'authorId',
-  key: 'authorId'
+  title: 'email',
+  dataIndex: 'email',
+  key: 'email'
 }, {
-  title: 'category',
-  dataIndex: 'category',
-  key: 'category'
+  title: 'phone',
+  dataIndex: 'phone',
+  key: 'phone'
 }, {
-  title: 'length',
-  dataIndex: 'length',
-  key: 'length'
+  title: 'residence',
+  dataIndex: 'residence',
+  key: 'residence'
 }, {
   title: 'Action',
   key: '',
   render: (text, record) => (
     <span>
-      <a href="#">Action 一 {record.authorId}</a>
+      <a href="#">Action 一 {record.phone}</a>
       <span className="ant-divider" />
       <a href="#">Delete</a>
       <span className="ant-divider" />
@@ -36,13 +36,22 @@ const columns = [{
 }];
 
 
-const UserList = ({users}) => {
-  return (<Table columns={columns} dataSource={users} />
-  );
-};
+class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let {Users}=this.props;
+    return ( <Table columns={columns} loading={this.context.loading} dataSource={Users} />    );
+  }
+}
 
 UserList.propTypes = {
-  users: React.PropTypes.array.isRequired
+  Users: React.PropTypes.array.isRequired
+};
+UserList.contextTypes={
+  loading:React.PropTypes.bool
 };
 
 export default UserList;

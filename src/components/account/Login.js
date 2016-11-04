@@ -1,4 +1,4 @@
-import { Form, Icon, Input, Button, Checkbox, Message } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 const FormItem = Form.Item;
 import React from 'react';
 import axios from 'axios';
@@ -13,7 +13,7 @@ const NormalLoginForm = Form.create()(React.createClass({
         return;
       }
       this.props.login(values).then((res) => {
-        Message.success(res, 'Login success');
+        message.success('Login success');
       });
 
      // Message.info('Received values of form: ', values);

@@ -9,6 +9,7 @@ export default function userReducer(state = initialState.user, action) {
       let _token = userData.token;
       let _decoded = jwt_decode(_token);
       userData.user.decodeToken = _decoded;
+      userData.user.token = _token;
 
       return Object.assign({}, state, userData.user);
 
@@ -22,7 +23,7 @@ export default function userReducer(state = initialState.user, action) {
 
     case types.GET_USER_SUCCESS:
 
-      return Object.assign({}, state, { allUser: action.usres });
+      return Object.assign({}, state, { allUsers: action.users });
     default:
       return state;
   }

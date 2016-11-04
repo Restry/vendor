@@ -10,7 +10,8 @@ class App extends React.Component {
   getChildContext() {
     return {
       user: this.props.user,
-      login: this.props.actions.login
+      login: this.props.actions.login,
+      loading:this.props.loading
     };
   }
 
@@ -51,7 +52,8 @@ App.propTypes = {
 };
 App.childContextTypes = {
   user: PropTypes.object,
-  login: PropTypes.func
+  login: PropTypes.func,
+  loading:PropTypes.bool
 };
 
 function mapStateToProps(state, ownProps) {

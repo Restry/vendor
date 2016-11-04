@@ -4,7 +4,8 @@
   "description": "Starter kit for React and Redux Pluralsight course by Cory House",
   "scripts": {
     "prestart": "babel-node tools/startMessage.js",
-    "start": "npm-run-all --parallel test:watch open:src lint:watch",
+    "start": "npm-run-all --parallel open:src",
+    "startall": "npm-run-all --parallel test:watch open:src lint:watch",
     "open:src": "babel-node tools/srcServer.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
@@ -33,6 +34,7 @@
     "jwt-decode": "^2.1.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "matchmedia-polyfill": "^0.3.0",
     "method-override": "^2.3.3",
     "mongoose": "^4.0.5",
     "morgan": "^1.6.1",

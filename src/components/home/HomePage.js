@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as UserActions from '../../actions/userActions';
 import UserList from '../account/UserList';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 class HomePage extends React.Component {
   constructor(props, context) {
@@ -16,33 +16,36 @@ class HomePage extends React.Component {
   }
 
   redirectToAddUserPage() {
-    browserHistory.push('/User');
+    // browserHistory.push('/User');
+
+    let {actions, user} = this.props;
+    actions.getAllUser(user.token);
   }
 
 
   render() {
-    const {Users} = this.props;
+    const {user} = this.props;
 
     return (
       <div>
         <h1>Users</h1>
-        <input type="submit" value="Add User"
-               className="btn btn-primary"
-               onClick={this.redirectToAddUserPage}/>
-        <UserList Users={Users}/>
+        <input type="submit" value="Loading Data"
+          className="btn btn-primary"
+          onClick={this.redirectToAddUserPage} />
+        <UserList Users={user.allUsers} />
       </div>
     );
   }
 }
 
 HomePage.propTypes = {
-  Users: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    Users: state.user.allUser
+    user: state.user
   };
 }
 

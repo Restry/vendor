@@ -60,7 +60,7 @@ module.exports = function (app) {
     // add back the password field for this query
     var query = User.findOne({
       email: req.body.email
-    }).select('_id email +password');
+    }).select('_id email +password nickname');
 
     query.exec(function (err, user) {
       if (err) throw err;
