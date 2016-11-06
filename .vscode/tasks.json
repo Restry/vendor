@@ -1,0 +1,12 @@
+{
+    "version": "0.1.0",
+    "command": "npm",
+    "isShellCommand": true,
+    "tasks": [
+        {
+            "taskName": "dev",
+            "args": [ "run", "open:src" ],
+            "isBuildCommand": true
+        }
+    ]
+}

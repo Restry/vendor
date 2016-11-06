@@ -4,8 +4,12 @@ var express = require('express'),
   utils = require('./utils'),
   rootPath = path.normalize(__dirname + '/../'),
   apiRouter = express.Router(),
-  User = require('./models/user'),
   router = express.Router();
+
+import model from './models/user';
+
+let {User, Needs} = model;
+
 
 module.exports = function (app) {
   // Users
@@ -13,6 +17,34 @@ module.exports = function (app) {
   apiRouter.get('/users', authenticate, function (req, res) {
     User.find({}, function (err, users) {
       res.json(users);
+    });
+  });
+
+  apiRouter.get('/needs', function (req, res) {
+    Needs.find({}, function (err, allNeeds) {
+      res.json(allNeeds);
+    });
+  });
+
+  apiRouter.post('/needs', authenticate, function (req, res) {
+    let newNeeds = new Needs({
+      title: req.body.title,
+      category: req.body.category,
+      notes: req.body.notes,
+      states: req.body.states,
+      vendor: req.body.vendor,
+      created: new Date()
+    });
+    console.log(`Needs opers authed ${JSON.stringify(req.body)}`);
+    newNeeds.save(function (err, need) {
+      if (err) throw err;
+
+      // send token
+      res.json({
+        success: true,
+        message: 'Successfully post a needs!',
+        need: newNeeds
+      });
     });
   });
 
@@ -81,12 +113,13 @@ module.exports = function (app) {
             });
           } else {
 
+            user.password = undefined;
+
             // create token
             var token = jwt.sign(user, app.get('superSecret'), {
               expiresInminutes: 1440
             });
 
-            user.password = undefined;
 
             // send token
             res.json({

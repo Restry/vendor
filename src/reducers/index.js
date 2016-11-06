@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
-import courses from './courseReducer';
+import needs from './needReducer';
 import authors from './authorReducer';
 import user from './userReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
-  courses,
+  needs,
   authors,
   user,
   ajaxCallsInProgress

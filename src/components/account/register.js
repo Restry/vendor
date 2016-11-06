@@ -16,9 +16,9 @@ const residences = [{
     label: 'Hangzhou',
     children: [{
       value: 'xihu',
-      label: 'West Lake',
-    }],
-  }],
+      label: 'West Lake'
+    }]
+  }]
 }, {
   value: 'jiangsu',
   label: 'Jiangsu',
@@ -37,6 +37,13 @@ const RegistrationForm = Form.create()(React.createClass({
     return {
       passwordDirty: false
     };
+
+  },
+  componentDidMount(){
+
+    this.props.form.setFieldsValue({
+      email:'123@qq.com'
+    });
   },
   handleSubmit(e) {
     e.preventDefault();
@@ -47,10 +54,8 @@ const RegistrationForm = Form.create()(React.createClass({
       }
 
       this.props.actions.registration(values).then((res) => {
-        debugger;
 
-
-      })
+      });
 
       console.log('Received values of form: ', values);
     });
@@ -79,13 +84,14 @@ const RegistrationForm = Form.create()(React.createClass({
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 6 },
-      wrapperCol: { span: 14 },
+      wrapperCol: { span: 14 }
     };
     const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '86',
+      initialValue: '86'
     })(
       <Select className="icp-selector">
         <Option value="86">+86</Option>
+        <Option value="80">+80</Option>
       </Select>
       );
     return (
@@ -97,10 +103,10 @@ const RegistrationForm = Form.create()(React.createClass({
           >
           {getFieldDecorator('email', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+              type: 'email', message: 'The input is not valid E-mail!'
             }, {
-              required: true, message: 'Please input your E-mail!',
-            }],
+              required: true, message: 'Please input your E-mail!'
+            }]
           })(
             <Input />
             )}
@@ -112,10 +118,10 @@ const RegistrationForm = Form.create()(React.createClass({
           >
           {getFieldDecorator('password', {
             rules: [{
-              required: true, message: 'Please input your password!',
+              required: true, message: 'Please input your password!'
             }, {
-              validator: this.checkConfirm,
-            }],
+              validator: this.checkConfirm
+            }]
           })(
             <Input type="password" onBlur={this.handlePasswordBlur} />
             )}
@@ -127,10 +133,10 @@ const RegistrationForm = Form.create()(React.createClass({
           >
           {getFieldDecorator('confirm', {
             rules: [{
-              required: true, message: 'Please confirm your password!',
+              required: true, message: 'Please confirm your password!'
             }, {
-              validator: this.checkPassowrd,
-            }],
+              validator: this.checkPassowrd
+            }]
           })(
             <Input type="password" />
             )}
@@ -148,7 +154,7 @@ const RegistrationForm = Form.create()(React.createClass({
           hasFeedback
           >
           {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!' }],
+            rules: [{ required: true, message: 'Please input your nickname!' }]
           })(
             <Input />
             )}
@@ -159,7 +165,7 @@ const RegistrationForm = Form.create()(React.createClass({
           >
           {getFieldDecorator('residence', {
             initialValue: ['zhejiang', 'hangzhou', 'xihu'],
-            rules: [{ type: 'array', required: true, message: 'Please select your habitual residence!' }],
+            rules: [{ type: 'array', required: true, message: 'Please select your habitual residence!' }]
           })(
             <Cascader options={residences} />
             )}
@@ -169,7 +175,7 @@ const RegistrationForm = Form.create()(React.createClass({
           label="Phone Number"
           >
           {getFieldDecorator('phone', {
-            rules: [{ required: true, message: 'Please input your phone number!' }],
+            rules: [{ required: true, message: 'Please input your phone number!' }]
           })(
             <Input addonBefore={prefixSelector} />
             )}
@@ -181,7 +187,7 @@ const RegistrationForm = Form.create()(React.createClass({
           <Row gutter={8}>
             <Col span={12}>
               {getFieldDecorator('captcha', {
-                rules: [{ required: true, message: 'Please input the captcha you got!' }],
+                rules: [{ required: true, message: 'Please input the captcha you got!' }]
               })(
                 <Input size="large" />
                 )}
@@ -196,7 +202,7 @@ const RegistrationForm = Form.create()(React.createClass({
             <Col span={14} offset={6}>
               <p>
                 {getFieldDecorator('agreement', {
-                  valuePropName: 'checked',
+                  valuePropName: 'checked'
                 })(
                   <Checkbox>I had read the <a>agreement</a></Checkbox>
                   )}

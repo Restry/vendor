@@ -2,23 +2,23 @@ import expect from 'expect';
 import React from 'react';
 import {mount, shallow} from 'enzyme';
 import TestUtils from 'react-addons-test-utils';
-import CourseForm from './CourseForm';
+import NeedForm from './NeedForm';
 
 function setup(saving) {
   const props = {
-    course: {}, saving: saving, errors: {},
+    need: {}, saving: saving, errors: {},
     onSave: () => {},
     onChange: () => {}
   };
 
-  return shallow(<CourseForm {...props} />);
+  return shallow(<NeedForm {...props} />);
 }
 
-describe('CourseForm via Enzyme', () => {
+describe('NeedForm via Enzyme', () => {
   it('renders form and h1', () => {
     const wrapper = setup(false);
     expect(wrapper.find('form').length).toBe(1);
-    expect(wrapper.find('h1').text()).toEqual('Manage Course');
+    expect(wrapper.find('h1').text()).toEqual('Manage Need');
   });
 
   it('save button is labeled "Save" when not saving', () => {

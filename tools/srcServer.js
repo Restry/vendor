@@ -1,3 +1,5 @@
+'use strict';
+
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
@@ -38,6 +40,11 @@ let env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
 	envConfig = require('../server/env')[env];
 
 mongoose.connect(envConfig.db);
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log('Open connection at : '+(new Date()).toLocaleString());
+});
 
 // EXPRESS CONFIG
 app.use(bodyParser.json());

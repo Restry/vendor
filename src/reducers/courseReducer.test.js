@@ -1,21 +1,21 @@
 import expect from 'expect';
-import courseReducer from './courseReducer';
-import * as actions from '../actions/courseActions';
+import needReducer from './needReducer';
+import * as actions from '../actions/needActions';
 
-describe('Course Reducer', () => {
-  it('should add course when passed CREATE_COURSE_SUCCESS', () => {
+describe('Need Reducer', () => {
+  it('should add need when passed CREATE_NEED_SUCCESS', () => {
     // arrange
     const initialState = [
       {title: 'A'},
       {title: 'B'}
     ];
 
-    const newCourse = {title: 'C'};
+    const newNeed = {title: 'C'};
 
-    const action = actions.createCourseSuccess(newCourse);
+    const action = actions.createNeedSuccess(newNeed);
 
     //act
-    const newState = courseReducer(initialState, action);
+    const newState = needReducer(initialState, action);
 
     //assert
     expect(newState.length).toEqual(3);
@@ -24,7 +24,7 @@ describe('Course Reducer', () => {
     expect(newState[2].title).toEqual('C');
   });
 
-  it('should update course when passed UPDATE_COURSE_SUCCESS', () => {
+  it('should update need when passed UPDATE_NEED_SUCCESS', () => {
     // arrange
     const initialState = [
       {id: 'A', title: 'A'},
@@ -32,17 +32,17 @@ describe('Course Reducer', () => {
       {id: 'C', title: 'C'}
     ];
 
-    const course = {id: 'B', title: 'New Title'};
-    const action = actions.updateCourseSuccess(course);
+    const need = {id: 'B', title: 'New Title'};
+    const action = actions.updateNeedSuccess(need);
 
     // act
-    const newState = courseReducer(initialState, action);
-    const updatedCourse = newState.find(a => a.id == course.id);
-    const untouchedCourse = newState.find(a => a.id == 'A');
+    const newState = needReducer(initialState, action);
+    const updatedNeed = newState.find(a => a.id == need.id);
+    const untouchedNeed = newState.find(a => a.id == 'A');
 
     // assert
-    expect(updatedCourse.title).toEqual('New Title');
-    expect(untouchedCourse.title).toEqual('A');
+    expect(updatedNeed.title).toEqual('New Title');
+    expect(untouchedNeed.title).toEqual('A');
     expect(newState.length).toEqual(3);
   });
 });

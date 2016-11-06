@@ -18,7 +18,7 @@ const Header = ({loading}) => {
                 <IndexLink to="/" activeClassName="active">Home</IndexLink>
               </Menu.Item>
               <Menu.Item key="2">
-                <Link to="/courses" activeClassName="active">Wechat</Link>
+                <Link to="/needs" activeClassName="active">Wechat</Link>
               </Menu.Item>
               <Menu.Item key="3">
                 <Link to="/about" activeClassName="active">Games</Link>

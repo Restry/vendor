@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
   getChildContext() {
+    console.log(`Getting context value user:${this.props.user},loading:${this.props.loading}`);
     return {
       user: this.props.user,
       login: this.props.actions.login,

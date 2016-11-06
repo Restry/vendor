@@ -6,7 +6,7 @@ const columns = [{
   title: 'nickname',
   dataIndex: 'nickname',
   key: 'nickname',
-  render: (text, record) => <Link to={'/course/' + record.id}>{text}</Link>
+  render: (text, record) => <Link to={'/need/' + record.id}>{text}</Link>
 }, {
   title: 'email',
   dataIndex: 'email',
@@ -39,18 +39,19 @@ const columns = [{
 class UserList extends React.Component {
   constructor(props) {
     super(props);
+
   }
 
   render() {
-    let {Users}=this.props;
-    return ( <Table columns={columns} loading={this.context.loading} dataSource={Users} />    );
+    let {Users,loading}=this.props;
+    console.log(`render props from UserList, loading is ${loading}`);
+    
+    return ( <Table columns={columns} loading={loading} dataSource={Users} />    );
   }
 }
 
 UserList.propTypes = {
-  Users: React.PropTypes.array.isRequired
-};
-UserList.contextTypes={
+  Users: React.PropTypes.array.isRequired,
   loading:React.PropTypes.bool
 };
 

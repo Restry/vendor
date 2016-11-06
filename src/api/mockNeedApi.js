@@ -3,11 +3,11 @@ import delay from './delay';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const courses = [
+const needs = [
   {
     id: "react-flux-building-applications",
     title: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
+    watchHref: "http://www.pluralsight.com/needs/react-flux-building-applications",
     authorId: "restry-house",
     length: "5:08",
     category: "JavaScript"
@@ -15,7 +15,7 @@ const courses = [
   {
     id: "clean-code",
     title: "Clean Code: Writing Code for Humans",
-    watchHref: "http://www.pluralsight.com/courses/writing-clean-code-humans",
+    watchHref: "http://www.pluralsight.com/needs/writing-clean-code-humans",
     authorId: "cory-house",
     length: "3:10",
     category: "Software Practices"
@@ -23,7 +23,7 @@ const courses = [
   {
     id: "architecture",
     title: "Architecting Applications for the Real World",
-    watchHref: "http://www.pluralsight.com/courses/architecting-applications-dotnet",
+    watchHref: "http://www.pluralsight.com/needs/architecting-applications-dotnet",
     authorId: "restry-house",
     length: "2:52",
     category: "Software Architecture"
@@ -31,7 +31,7 @@ const courses = [
   {
     id: "career-reboot-for-developer-mind",
     title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    watchHref: "http://www.pluralsight.com/courses/career-reboot-for-developer-mind",
+    watchHref: "http://www.pluralsight.com/needs/career-reboot-for-developer-mind",
     authorId: "cory-house",
     length: "2:30",
     category: "Career"
@@ -39,7 +39,7 @@ const courses = [
   {
     id: "web-components-shadow-dom",
     title: "Web Component Fundamentals",
-    watchHref: "http://www.pluralsight.com/courses/web-components-shadow-dom",
+    watchHref: "http://www.pluralsight.com/needs/web-components-shadow-dom",
     authorId: "cory-house",
     length: "5:10",
     category: "HTML5"
@@ -51,57 +51,57 @@ function replaceAll(str, find, replace) {
 }
 
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (course) => {
-  return replaceAll(course.title, ' ', '-');
+const generateId = (need) => {
+  return replaceAll(need.title, ' ', '-');
 };
 
-class CourseApi {
-  static getAllCourses() {
+class NeedApi {
+  static getAllNeeds() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(Object.assign([], courses));
+        resolve(Object.assign([], needs));
       }, delay);
     });
   }
 
-  static saveCourse(course) {
-    course = Object.assign({}, course); // to avoid manipulating object passed in.
+  static saveNeed(need) {
+    need = Object.assign({}, need); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Simulate server-side validation
-        const minCourseTitleLength = 1;
-        if (course.title.length < minCourseTitleLength) {
-          reject(`Title must be at least ${minCourseTitleLength} characters.`);
+        const minNeedTitleLength = 1;
+        if (need.title.length < minNeedTitleLength) {
+          reject(`Title must be at least ${minNeedTitleLength} characters.`);
         }
 
-        if (course.id) {
-          const existingCourseIndex = courses.findIndex(a => a.id == course.id);
-          courses.splice(existingCourseIndex, 1, course);
+        if (need.id) {
+          const existingNeedIndex = needs.findIndex(a => a.id == need.id);
+          needs.splice(existingNeedIndex, 1, need);
         } else {
           //Just simulating creation here.
-          //The server would generate ids and watchHref's for new courses in a real app.
+          //The server would generate ids and watchHref's for new needs in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
-          course.id = generateId(course);
-          course.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
-          courses.push(course);
+          need.id = generateId(need);
+          need.watchHref = `http://www.pluralsight.com/needs/${need.id}`;
+          needs.push(need);
         }
 
-        resolve(course);
+        resolve(need);
       }, delay);
     });
   }
 
-  static deleteCourse(courseId) {
+  static deleteNeed(needId) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const indexOfCourseToDelete = courses.findIndex(course => {
-          course.courseId == courseId;
+        const indexOfNeedToDelete = needs.findIndex(need => {
+          need.needId == needId;
         });
-        courses.splice(indexOfCourseToDelete, 1);
+        needs.splice(indexOfNeedToDelete, 1);
         resolve();
       }, delay);
     });
   }
 }
 
-export default CourseApi;
+export default NeedApi;

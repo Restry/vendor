@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import CourseListRow from './CourseListRow';
+import NeedListRow from './NeedListRow';
  import {Link} from 'react-router';
 
 import { Table, Icon } from 'antd';
@@ -8,25 +8,25 @@ const columns = [{
   title: 'title',
   dataIndex: 'title',
   key: 'title',
-  render: (text,record) => <Link to={'/course/' + record.id}>{text}</Link>
+  render: (text,record) => <Link to={'/need/' + record.id}>{text}</Link>
 }, {
-  title: 'authorId',
-  dataIndex: 'authorId',
-  key: 'authorId'
+  title: 'notes',
+  dataIndex: 'notes',
+  key: 'notes'
 }, {
   title: 'category',
   dataIndex: 'category',
   key: 'category'
 }, {
-  title: 'length',
-  dataIndex: 'length',
-  key: 'length'
+  title: 'states',
+  dataIndex: 'states',
+  key: 'states'
 }, {
   title: 'Action',
   key: '',
   render: (text, record) => (
     <span>
-      <a href="#">Action 一 {record.authorId}</a>
+      <a href="#">Action 一 {record.states}</a>
       <span className="ant-divider" />
       <a href="#">Delete</a>
       <span className="ant-divider" />
@@ -37,13 +37,13 @@ const columns = [{
   )
 }];
 
-const CourseList = ({courses}) => {
-  return ( <Table columns={columns} dataSource={courses}/>
+const NeedList = ({needs}) => {
+  return ( <Table columns={columns} dataSource={needs}/>
   );
 };
 
-CourseList.propTypes = {
-  courses: PropTypes.array.isRequired
+NeedList.propTypes = {
+  needs: PropTypes.array.isRequired
 };
 
-export default CourseList;
+export default NeedList;

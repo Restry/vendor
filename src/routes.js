@@ -3,16 +3,16 @@ import { Router,Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
-import CoursesPage from './components/course/CoursesPage';
+import NeedsPage from './components/need/NeedsPage';
 import RegisterPage from './components/account/register';
-import ManageCoursePage from './components/course/ManageCoursePage'; //eslint-disable-line import/no-named-as-default
+import ManageNeedPage from './components/need/ManageNeedPage'; //eslint-disable-line import/no-named-as-default
 
 export default ( 
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
-    <Route path="courses" component={CoursesPage} />
-    <Route path="course" component={ManageCoursePage} />
-    <Route path="course/:id" component={ManageCoursePage} />
+    <Route path="needs" component={NeedsPage} />
+    <Route path="need" component={ManageNeedPage} />
+    <Route path="need/:id" component={ManageNeedPage} />
     <Route path="about" component={AboutPage} />
     <Route path="register" component={RegisterPage} />
   </Route> 

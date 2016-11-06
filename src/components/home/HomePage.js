@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as UserActions from '../../actions/userActions';
 import UserList from '../account/UserList';
 import { browserHistory } from 'react-router';
+import {Tabs,Icon} from 'antd';
+const TabPane = Tabs.TabPane;
 
 class HomePage extends React.Component {
   constructor(props, context) {
@@ -27,13 +29,19 @@ class HomePage extends React.Component {
     const {user} = this.props;
 
     return (
-      <div>
-        <h1>Users</h1>
+  <Tabs defaultActiveKey="1">
+    <TabPane tab={<span><Icon type="apple" />Tab 1</span>} key="1">
+
         <input type="submit" value="Loading Data"
           className="btn btn-primary"
           onClick={this.redirectToAddUserPage} />
-        <UserList Users={user.allUsers} />
-      </div>
+        <UserList loading={this.context.loading} Users={user.allUsers} />
+    </TabPane>
+    <TabPane tab={<span><Icon type="android" />Tab 2</span>} key="2">
+      Tab 2
+    </TabPane>
+  </Tabs>
+
     );
   }
 }
@@ -43,6 +51,9 @@ HomePage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
+HomePage.contextTypes={
+  loading:React.PropTypes.bool
+};
 function mapStateToProps(state, ownProps) {
   return {
     user: state.user

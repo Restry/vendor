@@ -1,6 +1,6 @@
 export default {
   authors: [],
-  courses: [],
+  needs: [],
   user:{
     token:'',
     name:'',
@@ -8,3 +8,6 @@ export default {
   },
   ajaxCallsInProgress: 0
 };
+
+
+

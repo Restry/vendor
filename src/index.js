@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { Router, hashHistory, browserHistory } from 'react-router';
 import routes from './routes';
-import { loadCourses } from './actions/courseActions';
+import { loadNeeds } from './actions/needActions';
 import { loadAuthors } from './actions/authorActions';
 import * as utils from './selectors/utils';
 
@@ -19,7 +19,7 @@ let history = bws.browserversion == 'ie9' ? hashHistory : browserHistory;
 
 
 const store = configureStore();
-store.dispatch(loadCourses());
+store.dispatch(loadNeeds());
 store.dispatch(loadAuthors());
 
 render(
