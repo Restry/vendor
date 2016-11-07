@@ -1,113 +1,58 @@
-import { Button, Modal,Checkbox, Form, Input, Radio } from 'antd';
+import { Form, Input, Tooltip, Radio, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
 const FormItem = Form.Item;
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-const NeedForm = Form.create()(
-  (props) => {
-    const { visible, onCancel, onCreate, form } = props;
-    const { getFieldDecorator } = form;
-    
+class NeedForm extends Component {
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  componentDidMount() {
+      this.props.form.setFieldsValue(this.props.need);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.need._id != nextProps.need._id) {
+      this.props.form.setFieldsValue(nextProps.need);
+    }
+  }
+
+
+  render() {
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 }
     };
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '86'
-    })(
-      <Select className="icp-selector">
-        <Option value="86">+86</Option>
-        <Option value="80">+80</Option>
-      </Select>
-      );
-   
+    const { visible, onCancel, onCreate, form, need } = this.props;
+    const { getFieldDecorator } = form;
 
     return (
-        
 
-        <Form horizontal onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="标题"
-          hasFeedback
-          >
+      <Form horizontal onSubmit={onCreate}>
+        <FormItem {...formItemLayout} label="标题" hasFeedback>
           {getFieldDecorator('title', {
-            rules: [  {
+            rules: [{
               required: true, message: '请输入标题!'
             }]
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="类别" hasFeedback>
+          {getFieldDecorator('category', {
+            initialValue: 'Wechat'
           })(
-            <Input />
+            <Radio.Group>
+              <Radio value="Wechat">Wechat</Radio>
+              <Radio value="Apple">Apple</Radio>
+              <Radio value="Game">Game</Radio>
+            </Radio.Group>
             )}
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Password"
-          hasFeedback
-          >
-          {getFieldDecorator('password', {
-            rules: [{
-              required: true, message: 'Please input your password!'
-            }, {
-              validator: this.checkConfirm
-            }]
-          })(
-            <Input type="password" onBlur={this.handlePasswordBlur} />
-            )}
+
+        <FormItem {...formItemLayout} label="描述">
+          {getFieldDecorator('notes')(<Input type="textarea" />)}
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Confirm Password"
-          hasFeedback
-          >
-          {getFieldDecorator('confirm', {
-            rules: [{
-              required: true, message: 'Please confirm your password!'
-            }, {
-              validator: this.checkPassowrd
-            }]
-          })(
-            <Input type="password" />
-            )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label={(
-            <span>
-              Nickname&nbsp;
-              <Tooltip title="What do you want other to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
-          hasFeedback
-          >
-          {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!' }]
-          })(
-            <Input />
-            )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Habitual Residence"
-          >
-          {getFieldDecorator('residence', {
-            initialValue: ['zhejiang', 'hangzhou', 'xihu'],
-            rules: [{ type: 'array', required: true, message: 'Please select your habitual residence!' }]
-          })(
-            <Cascader options={residences} />
-            )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Phone Number"
-          >
-          {getFieldDecorator('phone', {
-            rules: [{ required: true, message: 'Please input your phone number!' }]
-          })(
-            <Input addonBefore={prefixSelector} />
-            )}
-        </FormItem>
-         
+
+
 
         <FormItem>
           <Row>
@@ -125,11 +70,18 @@ const NeedForm = Form.create()(
         </FormItem>
       </Form>
 
-
     );
   }
-);
-export default NeedForm;
+}
+
+NeedForm.propTypes = {
+  need: PropTypes.object
+};
+
+export default Form.create()(NeedForm);
+
+
+
 
 /*
 

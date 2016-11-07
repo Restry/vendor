@@ -8,10 +8,20 @@ import { message } from 'antd';
 
 const ManageNeedPage = React.createClass({
   getInitialState() {
-    return { visible: false };
+    return {
+      need: Object.assign({}, this.props.need),
+    visible: false };
   },
   handleCancel() {
     this.setState({ visible: false });
+  },
+
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.need._id != nextProps.need._id) {
+      // Necessary to populate form when existing need is loaded directly.
+      this.setState({need: Object.assign({}, nextProps.need)});
+    }
   },
 
   redirect() {
@@ -38,8 +48,6 @@ const ManageNeedPage = React.createClass({
           //this.setState({saving: false});
         });
 
-
-
       console.log('Received values of form: ', values);
       form.resetFields();
       //  this.setState({ visible: false });
@@ -55,6 +63,7 @@ const ManageNeedPage = React.createClass({
         visible={this.state.visible}
         onCancel={this.handleCancel}
         onCreate={this.handleCreate}
+        need={this.state.need}
         />
     );
   }
@@ -63,17 +72,29 @@ ManageNeedPage.contextTypes = {
   router: PropTypes.object
 };
 
+function getNeedById(needs, id) {
+  const need = needs.filter(need => need._id == id);
+  if (need) return need[0]; //since filter returns an array, have to grab the first.
+  return null;
+}
+
+
+ManageNeedPage.propTypes = {
+  need: PropTypes.object
+};
 function mapStateToProps(state, ownProps) {
   const needId = ownProps.params.id; // from the path `/need/:id`
 
-  let need = { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' };
+  let need = { _id: '', process: '', title: '', states: '', vendor: '', category: '' };
+
+  console.dir(needId);
 
   if (needId && state.needs.length > 0) {
-    //need = getNeedById(state.needs, needId);
+    need = getNeedById(state.needs, needId);
   }
 
   return {
-    user: state.user
+    need
   };
 }
 
