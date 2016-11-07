@@ -17,7 +17,7 @@ const ManageNeedPage = React.createClass({
   redirect() {
     //this.setState({saving: false});
     message.success('Need saved');
-    this.context.router.push('/needs');
+    this.context.router.push('/');
   },
 
   handleCreate(e) {

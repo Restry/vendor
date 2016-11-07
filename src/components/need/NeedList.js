@@ -1,28 +1,28 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import NeedListRow from './NeedListRow';
- import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 import { Table, Icon } from 'antd';
 
 const columns = [{
-  title: 'title',
+  title: '标题',
   dataIndex: 'title',
   key: 'title',
-  render: (text,record) => <Link to={'/need/' + record.id}>{text}</Link>
+  render: (text, record) => <Link to={'/need/' + record._id}>{text}</Link>
 }, {
-  title: 'notes',
+  title: '描述',
   dataIndex: 'notes',
   key: 'notes'
 }, {
-  title: 'category',
-  dataIndex: 'category',
-  key: 'category'
-}, {
-  title: 'states',
+  title: '状态',
   dataIndex: 'states',
   key: 'states'
 }, {
-  title: 'Action',
+  title: '进度',
+  dataIndex: 'process',
+  key: 'process'
+}, {
+  title: '操作',
   key: '',
   render: (text, record) => (
     <span>
@@ -37,13 +37,19 @@ const columns = [{
   )
 }];
 
-const NeedList = ({needs}) => {
-  return ( <Table columns={columns} dataSource={needs}/>
-  );
-};
+class NeedList extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+  }
 
+  render() {
+    return (<Table loading={this.props.loading} columns={columns} dataSource={this.props.needs} />);
+  }
+}
+ 
 NeedList.propTypes = {
-  needs: PropTypes.array.isRequired
+  needs: PropTypes.array.isRequired,
+  loading: PropTypes.bool
 };
 
 export default NeedList;

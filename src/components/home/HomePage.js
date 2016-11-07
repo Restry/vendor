@@ -4,59 +4,78 @@ import { bindActionCreators } from 'redux';
 import * as UserActions from '../../actions/userActions';
 import UserList from '../account/UserList';
 import { browserHistory } from 'react-router';
-import {Tabs,Icon} from 'antd';
+import { Tabs, Icon, Button, Carousel } from 'antd';
 const TabPane = Tabs.TabPane;
+import NeedsPage from '../need/NeedsPage';
+
+
 
 class HomePage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.redirectToAddUserPage = this.redirectToAddUserPage.bind(this);
+    this.redirectToAddNeedPage = this.redirectToAddNeedPage.bind(this);
   }
 
   UserRow(User, index) {
     return <div key={index}>{User.title}</div>;
   }
 
-  redirectToAddUserPage() {
-    // browserHistory.push('/User');
 
-    let {actions, user} = this.props;
-    actions.getAllUser(user.token);
+  redirectToAddNeedPage() {
+    browserHistory.push('/need');
   }
 
 
   render() {
-    const {user} = this.props;
-
+    const {user, showTabs} = this.props;
+    let operations = <span />;
+    if (user.token) {
+      operations = <Button onClick={this.redirectToAddNeedPage}>发布一条需求</Button>;
+    }
     return (
-  <Tabs defaultActiveKey="1">
-    <TabPane tab={<span><Icon type="apple" />Tab 1</span>} key="1">
+      <div>
+        <Carousel autoplay effect="fade">
+          <div>
+            <img src="http://lorempixel.com/1180/350/technics/1/Vendor-Online/" alt="Vendor-Online" />
+          </div>
+          <div>
+            <img src="http://lorempixel.com/1180/350/technics/2/Vendor-Online/" alt="Vendor-Online" />
 
-        <input type="submit" value="Loading Data"
-          className="btn btn-primary"
-          onClick={this.redirectToAddUserPage} />
-        <UserList loading={this.context.loading} Users={user.allUsers} />
-    </TabPane>
-    <TabPane tab={<span><Icon type="android" />Tab 2</span>} key="2">
-      Tab 2
-    </TabPane>
-  </Tabs>
+          </div>
+          <div>
+            <img src="http://lorempixel.com/1180/350/technics/3/Vendor-Online/" alt="Vendor-Online" />
+          </div>
+          <div>
+            <img src="http://lorempixel.com/1180/350/technics/4/Vendor-Online/" alt="Vendor-Online" />
+          </div>
+        </Carousel>
 
+        <Tabs tabBarExtraContent={operations} defaultActiveKey={showTabs[0].title}>
+          {showTabs.map(t => {
+            return <TabPane tab={<span><Icon className="vendor" type={t.class} />{t.title}</span>} key={t.title}>
+              <NeedsPage category={t.title} />
+            </TabPane>;
+          })}
+        </Tabs>
+      </div>
     );
   }
 }
 
 HomePage.propTypes = {
   user: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  showTabs: PropTypes.array.isRequired
 };
 
-HomePage.contextTypes={
-  loading:React.PropTypes.bool
-};
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.user
+    user: state.user,
+    showTabs: [
+      { title: 'Wechat', class: 'wechat' },
+      { title: 'Apple', class: 'apple' },
+      { title: 'Game', class: 'game' }
+    ]
   };
 }
 

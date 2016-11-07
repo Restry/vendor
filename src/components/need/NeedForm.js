@@ -6,8 +6,134 @@ const NeedForm = Form.create()(
   (props) => {
     const { visible, onCancel, onCreate, form } = props;
     const { getFieldDecorator } = form;
+    
+    const formItemLayout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 14 }
+    };
+    const prefixSelector = getFieldDecorator('prefix', {
+      initialValue: '86'
+    })(
+      <Select className="icp-selector">
+        <Option value="86">+86</Option>
+        <Option value="80">+80</Option>
+      </Select>
+      );
+   
+
     return (
-        <Form horizontal onSubmit={onCreate}>
+        
+
+        <Form horizontal onSubmit={this.handleSubmit}>
+        <FormItem
+          {...formItemLayout}
+          label="标题"
+          hasFeedback
+          >
+          {getFieldDecorator('title', {
+            rules: [  {
+              required: true, message: '请输入标题!'
+            }]
+          })(
+            <Input />
+            )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="Password"
+          hasFeedback
+          >
+          {getFieldDecorator('password', {
+            rules: [{
+              required: true, message: 'Please input your password!'
+            }, {
+              validator: this.checkConfirm
+            }]
+          })(
+            <Input type="password" onBlur={this.handlePasswordBlur} />
+            )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="Confirm Password"
+          hasFeedback
+          >
+          {getFieldDecorator('confirm', {
+            rules: [{
+              required: true, message: 'Please confirm your password!'
+            }, {
+              validator: this.checkPassowrd
+            }]
+          })(
+            <Input type="password" />
+            )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={(
+            <span>
+              Nickname&nbsp;
+              <Tooltip title="What do you want other to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+          hasFeedback
+          >
+          {getFieldDecorator('nickname', {
+            rules: [{ required: true, message: 'Please input your nickname!' }]
+          })(
+            <Input />
+            )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="Habitual Residence"
+          >
+          {getFieldDecorator('residence', {
+            initialValue: ['zhejiang', 'hangzhou', 'xihu'],
+            rules: [{ type: 'array', required: true, message: 'Please select your habitual residence!' }]
+          })(
+            <Cascader options={residences} />
+            )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="Phone Number"
+          >
+          {getFieldDecorator('phone', {
+            rules: [{ required: true, message: 'Please input your phone number!' }]
+          })(
+            <Input addonBefore={prefixSelector} />
+            )}
+        </FormItem>
+         
+
+        <FormItem>
+          <Row>
+            <Col span={14} offset={6}>
+              <p>
+                {getFieldDecorator('agreement', {
+                  valuePropName: 'checked'
+                })(
+                  <Checkbox>我同意此 <a>协议</a></Checkbox>
+                  )}
+              </p>
+              <Button type="primary" htmlType="submit" size="large">发布</Button>
+            </Col>
+          </Row>
+        </FormItem>
+      </Form>
+
+
+    );
+  }
+);
+export default NeedForm;
+
+/*
+
+<Form horizontal onSubmit={onCreate}>
           <FormItem label="Title">
             {getFieldDecorator('title', {
               rules: [{ required: true, message: 'Please input the title of collection!' }]
@@ -42,12 +168,7 @@ const NeedForm = Form.create()(
 
         </FormItem>
         </Form>
-    );
-  }
-);
-export default NeedForm;
 
-/*
 import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';

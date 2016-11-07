@@ -1,7 +1,7 @@
-
 import LoginForm from './Login';
 import React from 'react';
 import { Popover, Button } from 'antd';
+import { Link, IndexLink } from 'react-router';
 
 const Userinfo = React.createClass({
   getInitialState() {
@@ -16,21 +16,27 @@ const Userinfo = React.createClass({
   render() {
     let {user,login} = this.context;
 
-    let content = <div>
-      <LoginForm login={login}/>
+    let content =  <div>
+      {!user.token && <LoginForm login={login}/>}
+
       <a onClick={this.hide}>Close</a>
     </div>;
 
     return (
-      <Popover
-        content={content}
-        title="Login Form"
-        trigger="click"
-        visible={this.state.visible}
-        onVisibleChange={this.handleVisibleChange}
-        >
-        <Button type="primary">{user && user.nickname || "Login"}</Button>
-      </Popover>
+      <div>
+        <Popover
+          content={content}
+          title="登陆"
+          trigger="click"
+          visible={this.state.visible}
+          placement="rightBottom" 
+          onVisibleChange={this.handleVisibleChange}
+          >
+        <Button>{user && user.nickname || "登陆"}</Button>
+          
+        </Popover>
+        {!user.token && <Link to="/register">注册</Link>}
+      </div>
     );
   }
 });
@@ -40,8 +46,5 @@ Userinfo.contextTypes = {
   login: React.PropTypes.func
 };
 
-Userinfo.propTypes = {
-  user: React.PropTypes.object.isRequired
-};
 
 export default Userinfo;

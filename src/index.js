@@ -11,8 +11,8 @@ import { loadNeeds } from './actions/needActions';
 import { loadAuthors } from './actions/authorActions';
 import * as utils from './selectors/utils';
 
-import './styles/styles.css';
 import './styles/default.less';
+import './styles/styles.css';
 
 let bws = utils.browserInfo();
 let history = bws.browserversion == 'ie9' ? hashHistory : browserHistory;

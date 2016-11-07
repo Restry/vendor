@@ -1,5 +1,5 @@
 {
-  "name": "ps-redux",
+  "name": "vendor",
   "version": "1.0.0",
   "description": "Starter kit for React and Redux Pluralsight need by Cory House",
   "scripts": {
@@ -18,7 +18,7 @@
     "build": "babel-node tools/build.js",
     "postbuild": "babel-node tools/distServer.js"
   },
-  "author": "Cory House",
+  "author": "Restry",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.2",
@@ -88,6 +88,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/coryhouse/pluralsight-redux-starter"
+    "url": "https://github.com/restry/vendor"
   }
 }

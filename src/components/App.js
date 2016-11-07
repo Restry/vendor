@@ -2,9 +2,9 @@
 import React, { PropTypes } from 'react';
 import Header from './common/Header';
 import { connect } from 'react-redux';
-import { Breadcrumb } from 'antd';
 import * as userActions from '../actions/userActions';
 import { bindActionCreators } from 'redux';
+import Breadcrumb from './common/Breadcrumb';
 
 class App extends React.Component {
   getChildContext() {
@@ -17,19 +17,17 @@ class App extends React.Component {
   }
 
   render() {
+
+let {actions,user,loading,current} = this.props;
+
     return (
       <div className="ant-layout-top">
 
-        <Header login={this.props.actions.login} user={this.props.user} loading={this.props.loading} />
+        <Header login={actions.login} user={user} loading={loading} />
 
         <div className="ant-layout-wrapper">
           <div className="ant-layout-breadcrumb">
-            <Breadcrumb>
-              <Breadcrumb.Item>首页</Breadcrumb.Item>
-              <Breadcrumb.Item>应用列表</Breadcrumb.Item>
-              <Breadcrumb.Item>某应用</Breadcrumb.Item>
-
-            </Breadcrumb>
+            <Breadcrumb current={current}/>
           </div>
           <div className="ant-layout-container">
             {this.props.children}
@@ -49,6 +47,7 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object,
+  current: PropTypes.array,
   actions: PropTypes.object
 };
 App.childContextTypes = {
@@ -60,7 +59,8 @@ App.childContextTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     loading: state.ajaxCallsInProgress > 0,
-    user: state.user
+    user: state.user,
+    current:[]
   };
 }
 

@@ -42,14 +42,21 @@ const NormalLoginForm = Form.create()(React.createClass({
             valuePropName: 'checked',
             initialValue: true
           })(
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>记住我</Checkbox>
             )}
-          <a className="login-form-forgot">Forgot password</a>
+            
+          <a className="login-form-forgot">忘记密码</a>
+          或者
+          <Link to="/register" >立即注册</Link>
+          
+        </FormItem>
+        <FormItem>
+        
           <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
+            登陆
           </Button>
-          Or
-          <Link to="/register" >register now!</Link>
+
+
         </FormItem>
       </Form>
     );
