@@ -10,7 +10,8 @@ const ManageNeedPage = React.createClass({
   getInitialState() {
     return {
       need: Object.assign({}, this.props.need),
-    visible: false };
+      visible: false
+    };
   },
   handleCancel() {
     this.setState({ visible: false });
@@ -20,7 +21,7 @@ const ManageNeedPage = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (this.props.need._id != nextProps.need._id) {
       // Necessary to populate form when existing need is loaded directly.
-      this.setState({need: Object.assign({}, nextProps.need)});
+      this.setState({ need: Object.assign({}, nextProps.need) });
     }
   },
 
@@ -69,7 +70,8 @@ const ManageNeedPage = React.createClass({
   }
 });
 ManageNeedPage.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
+  user:PropTypes.object
 };
 
 function getNeedById(needs, id) {
@@ -94,6 +96,7 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
+    user: state.user,
     need
   };
 }
