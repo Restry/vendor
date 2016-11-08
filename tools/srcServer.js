@@ -17,7 +17,7 @@ let mongoose = require('mongoose'),
 
 /* eslint-disable no-console */
 
-const port = 3000;
+const port = 80;
 const app = express();
 const compiler = webpack(config);
 
