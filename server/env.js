@@ -4,7 +4,7 @@ var path = require('path'),
 module.exports = {
 	development: {
 		rootPath: rootPath,
-		db: 'mongodb://mongo/vendor-db',
+		db: 'mongodb://42.121.119.36/vendor-db',
 		port: process.env.PORT || 3000
 	},
 	production: {
