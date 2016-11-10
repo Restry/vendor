@@ -13,8 +13,6 @@ let mongoose = require('mongoose'),
 /*eslint-disable no-console */
 
 
-
-const port = 80;
 const app = express();
 
 app.use(compression());
@@ -58,10 +56,10 @@ app.get('*', function (req, res) {
 });
 
 
-app.listen(port, function(err) {
+app.listen(envConfig.port, function(err) {
   if (err) {
     console.log(err);
   } else {
-    open(`http://localhost:${port}`);
+    console.log(`Linsten at http://localhost:${envConfig.port}`);
   }
 });
