@@ -4,7 +4,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 let HtmlwebpackPlugin = require('html-webpack-plugin');
 
 const GLOBALS = {
-  'process.env.NODE_ENV': 'production'
+  'process.env.NODE_ENV': JSON.stringify('production')
 };
 
 export default {
