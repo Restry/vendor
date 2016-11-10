@@ -9,7 +9,7 @@ module.exports = {
 	},
 	production: {
 		rootPath: rootPath,
-		db: process.env.MONGOLAB_URI || 'mongodb://heroku_v69r5s4p:q2bethh9shan24v6ov2q111fnm@ds031893.mongolab.com:31893/heroku_v69r5s4p',
+		db: 'mongodb://42.121.119.36/vendor-db',
 		port: process.env.PORT || 80
 	}
 };
