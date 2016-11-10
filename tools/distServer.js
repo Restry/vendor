@@ -22,8 +22,10 @@ app.use(express.static('dist'));
 
 
 // ENVIRONMENT CONFIG
-let env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
+let env =  'production',
 	envConfig = require('../server/env')[env];
+
+console.log(`Current process env is : ${process.env.NODE_ENV}`);
 
 mongoose.connect(envConfig.db);
 let db = mongoose.connection;
