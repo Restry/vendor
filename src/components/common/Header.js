@@ -17,8 +17,8 @@ const Header = ({loading}) => {
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
 
               <Menu.Item key="1">
-                <IndexLink to="/" activeClassName="active">首页</IndexLink>
-              </Menu.Item> 
+                <IndexLink to="/" activeClassName="active">首页-001</IndexLink>
+              </Menu.Item>
               <Menu.Item key="2">
                 <Link to="/about" activeClassName="active">关于我们</Link>
               </Menu.Item>
