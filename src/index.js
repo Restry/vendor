@@ -11,7 +11,7 @@ import { loadNeeds } from './actions/needActions';
 import { loadAuthors } from './actions/authorActions';
 import * as utils from './selectors/utils';
 
-import './styles/default.less';
+//import './styles/default.less';
 import './styles/styles.css';
 
 let bws = utils.browserInfo();
