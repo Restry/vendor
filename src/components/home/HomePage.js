@@ -33,22 +33,6 @@ class HomePage extends React.Component {
       operations = <Button onClick={this.redirectToAddNeedPage}>发布一条需求</Button>;
     }
     return (
-      <div>
-        <Carousel autoplay effect="fade">
-          <div>
-            <img src="http://lorempixel.com/1180/350/technics/1/Vendor-Online/" alt="Vendor-Online" />
-          </div>
-          <div>
-            <img src="http://lorempixel.com/1180/350/technics/2/Vendor-Online/" alt="Vendor-Online" />
-
-          </div>
-          <div>
-            <img src="http://lorempixel.com/1180/350/technics/3/Vendor-Online/" alt="Vendor-Online" />
-          </div>
-          <div>
-            <img src="http://lorempixel.com/1180/350/technics/4/Vendor-Online/" alt="Vendor-Online" />
-          </div>
-        </Carousel>
 
         <Tabs tabBarExtraContent={operations} defaultActiveKey={showTabs[0].title}>
           {showTabs.map(t => {
@@ -57,7 +41,7 @@ class HomePage extends React.Component {
             </TabPane>;
           })}
         </Tabs>
-      </div>
+
     );
   }
 }

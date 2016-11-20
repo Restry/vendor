@@ -11,8 +11,11 @@ import { loadNeeds } from './actions/needActions';
 import { loadAuthors } from './actions/authorActions';
 import * as utils from './selectors/utils';
 
-//import './styles/default.less';
-import './styles/styles.css';
+import './assets/styles/default.less';
+import './assets/styles/styles.css';
+import './assets/styles/gsp.css';
+import './assets/styles/demo/gsp-demo-icons.css';
+import './assets/styles/demo/gsp-demo.css';
 
 let bws = utils.browserInfo();
 let history = bws.browserversion == 'ie9' ? hashHistory : browserHistory;

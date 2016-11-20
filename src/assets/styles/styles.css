@@ -88,3 +88,6 @@
     display: block;
     font-family: "vendor" !important;
 }
+
+
+.clear{clear:both;}

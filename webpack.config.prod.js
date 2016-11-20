@@ -32,8 +32,6 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM'
   },
-
-
   devServer: {
     contentBase: './dist'
   },
@@ -63,6 +61,8 @@ module.exports = {
       { test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel'] },
       { test: /(\.css)$/, loader: ExtractTextPlugin.extract("css?sourceMap") },
       { test: /(\.less)$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader") },
+
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
 
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
       { test: /\.(woff|woff2)$/, loader: "url?prefix=font/&limit=5000" },

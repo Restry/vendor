@@ -1,37 +1,65 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
-import { Menu, Breadcrumb, Row, Col } from 'antd';
 import User from '../account/userinfo';
+import { Menu, Icon } from 'antd';
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
+
 
 const Header = ({loading}) => {
   return (
-    <div className="ant-layout-header">
-      <div className="ant-layout-wrapper">
-        <Row>
-          <Col span={18}>
-            <div className="ant-layout-logo">
-              <i className="vendor anticon-logo"></i>
-            </div>
+    <div>
+      {/*NAVBAR*/}
+      {/*===================================================*/}
+      <div id="navbar-container" className="boxed">
+        <div className="col-lg-8 col-lg-offset-2">
 
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+          {/*Brand logo & name*/}
+          {/*================================*/}
+          <div className="navbar-header">
+            <a href="index.html" className="navbar-brand">
+              <img src={require('../../assets/img/logo.png')} alt="Gsp Logo" className="brand-icon" />
+              <div className="brand-title">
+                <span className="brand-text">BOC GSP</span>
+              </div>
+            </a>
+          </div>
+          {/*================================*/}
+          {/*End brand logo & name*/}
 
-              <Menu.Item key="1">
-                <IndexLink to="/" activeClassName="active">首页-001</IndexLink>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/about" activeClassName="active">关于我们</Link>
-              </Menu.Item>
-            </Menu>
-          </Col>
 
-          <Col span={6} className="ant-userinfo">
-            <User />
-          </Col>
-        </Row>
+          {/*Navbar Dropdown*/}
+          {/*================================*/}
+          <div className="navbar-content clearfix">
 
+            <ul className="nav navbar-top-links pull-right">
+
+              {/*User dropdown*/}
+              {/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/}
+              <li id="dropdown-user" className="dropdown">
+                <User />
+              </li>
+              {/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/}
+              {/*End user dropdown*/}
+
+              <li>
+                <a href="#" className="aside-toggle navbar-aside-icon">
+                  <i className="pci-ver-dots"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          {/*================================*/}
+          {/*End Navbar Dropdown*/}
+        </div>
+        <div className="clear"></div>
       </div>
+
+      {/*===================================================*/}
+      {/*END NAVBAR*/}
     </div>
+
   );
 };
 
