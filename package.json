@@ -45,10 +45,7 @@
     "matchmedia-polyfill": "^0.3.0",
     "method-override": "^2.3.3",
     "mongoose": "^4.0.5",
-    "morgan": "^1.6.1"
-  },
-
-  "devDependencies": {
+    "morgan": "^1.6.1",
     "q": "^1.4.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
