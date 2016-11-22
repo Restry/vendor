@@ -11,7 +11,7 @@ import { loadNeeds } from './actions/needActions';
 import { loadAuthors } from './actions/authorActions';
 import * as utils from './selectors/utils';
 
-import './assets/styles/default.less';
+//import './assets/styles/default.less';
 import './assets/styles/styles.css';
 
 

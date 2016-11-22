@@ -10,6 +10,6 @@ module.exports = {
 	production: {
 		rootPath: rootPath,
 		db: 'mongodb://42.121.119.36/vendor-db',
-		port: process.env.PORT || 80
+		port: process.env.PORT || 8001
 	}
 };
