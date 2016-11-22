@@ -47,7 +47,6 @@
     "method-override": "^2.3.3",
     "mongoose": "^4.0.5",
     "morgan": "^1.6.1",
-    "webpack-visualizer-plugin": "^0.1.5",
     "q": "^1.4.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
