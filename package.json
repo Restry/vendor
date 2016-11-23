@@ -11,7 +11,7 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js src/**/*.test.js src/components/**/*.test.js",
     "test:watch": "npm run test -- --watch",
-    "clean-dist": "npm run remove-dist && mkdir dist",
+    "clean-dist": "npm run remove-dist && mkdir dist && babel-node tools/copyAssets.js",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
     "build": "babel-node tools/build.js",
     "buildtest":"webpack --profile --colors --config webpack.config.prod.js",
